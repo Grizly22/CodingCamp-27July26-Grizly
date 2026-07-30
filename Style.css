@@ -1,0 +1,609 @@
+/* ============================================================
+   LIFE DASHBOARD — Style.css
+   ============================================================ */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --bg:           #0f1117;
+  --bg-card:      #1a1d27;
+  --bg-card-hover:#20243a;
+  --border:       #2a2d3e;
+  --accent:       #6c63ff;
+  --accent-light: #8b85ff;
+  --accent-glow:  rgba(108, 99, 255, 0.25);
+  --danger:       #ff5c5c;
+  --success:      #3ecf8e;
+  --warning:      #f5a623;
+  --text-primary: #e8eaf0;
+  --text-secondary:#9399b2;
+  --text-muted:   #5a5f7a;
+  --radius:       14px;
+  --radius-sm:    8px;
+  --shadow:       0 4px 24px rgba(0, 0, 0, 0.4);
+  --transition:   0.2s ease;
+  --font:         'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font);
+  min-height: 100vh;
+  padding: 24px 20px 48px;
+  line-height: 1.6;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ============================================================
+   HEADER — Greeting
+   ============================================================ */
+.header {
+  max-width: 1100px;
+  margin: 0 auto 32px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.greeting-text {
+  font-size: 0.9rem;
+  color: var(--accent-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.greeting-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.datetime-block {
+  text-align: right;
+}
+
+.clock {
+  font-size: 2.4rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.date {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* ============================================================
+   DASHBOARD GRID
+   ============================================================ */
+.dashboard-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+/* Timer spans full left column */
+.card--timer { grid-column: 1; grid-row: 1; }
+/* Links sit below timer */
+.card--links { grid-column: 1; grid-row: 2; }
+/* Todo spans full right column */
+.card--todo  { grid-column: 2; grid-row: 1 / 3; }
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card__icon {
+  font-size: 1.1rem;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 9px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  white-space: nowrap;
+  font-family: var(--font);
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn--primary:hover {
+  background: var(--accent-light);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+.btn--secondary {
+  background: var(--border);
+  color: var(--text-primary);
+}
+.btn--secondary:hover { background: #353848; }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.btn--ghost:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.btn--danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid transparent;
+}
+.btn--danger:hover {
+  background: rgba(255, 92, 92, 0.1);
+  border-color: var(--danger);
+}
+
+.btn--icon {
+  padding: 6px 8px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+}
+
+.btn--sm {
+  padding: 6px 12px;
+  font-size: 0.78rem;
+}
+
+/* ============================================================
+   FOCUS TIMER
+   ============================================================ */
+.timer-display {
+  font-size: 4rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  padding: 16px 0 4px;
+}
+
+.timer-label {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.timer-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Timer running state */
+.card--timer.is-running .timer-display {
+  color: var(--accent-light);
+}
+
+.card--timer.is-done .timer-display {
+  color: var(--success);
+}
+
+/* ============================================================
+   TO-DO LIST
+   ============================================================ */
+
+/* --- Form --- */
+.todo-form {
+  display: flex;
+  gap: 8px;
+}
+
+.todo-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 14px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-family: var(--font);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.todo-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.todo-input::placeholder { color: var(--text-muted); }
+
+/* --- Filters --- */
+.todo-filters {
+  display: flex;
+  gap: 6px;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+  font-family: var(--font);
+}
+
+.filter-btn:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* --- List --- */
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  max-height: 420px;
+  padding-right: 4px;
+  flex: 1;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  transition: border-color var(--transition), background var(--transition);
+  animation: slideIn 0.18s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.todo-item:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+}
+
+/* Checkbox */
+.todo-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  border: 2px solid var(--border);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+  position: relative;
+}
+
+.todo-checkbox:checked {
+  background: var(--success);
+  border-color: var(--success);
+}
+
+.todo-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 11px;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* Task text */
+.todo-text {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  word-break: break-word;
+  transition: color var(--transition);
+}
+
+.todo-item.is-done .todo-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* Actions */
+.todo-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.todo-item:hover .todo-actions,
+.todo-item:focus-within .todo-actions {
+  opacity: 1;
+}
+
+/* --- Footer --- */
+.todo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+.todo-count {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Empty state */
+.todo-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding: 32px 0;
+  flex: 1;
+}
+
+/* ============================================================
+   QUICK LINKS
+   ============================================================ */
+
+/* --- Form --- */
+.link-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.link-input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 14px;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-family: var(--font);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+  width: 100%;
+}
+
+.link-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.link-input::placeholder { color: var(--text-muted); }
+
+/* --- Links Grid --- */
+.links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.link-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 6px 14px 6px 12px;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link-chip:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.link-chip__favicon {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.link-chip__delete {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0 0 0 4px;
+  opacity: 0.5;
+  transition: opacity var(--transition);
+  line-height: 1;
+}
+
+.link-chip:hover .link-chip__delete { opacity: 1; }
+
+.links-empty {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding: 8px 0;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.15s ease;
+}
+
+.modal-overlay[hidden] { display: none; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  width: min(420px, 90vw);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: scaleIn 0.15s ease;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.modal__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.modal__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 760px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .card--timer { grid-column: 1; grid-row: auto; }
+  .card--todo  { grid-column: 1; grid-row: auto; }
+  .card--links { grid-column: 1; grid-row: auto; }
+
+  .greeting-name { font-size: 1.5rem; }
+  .clock { font-size: 1.8rem; }
+  .timer-display { font-size: 3rem; }
+
+  .link-form {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .datetime-block { text-align: left; }
+}
+
+@media (max-width: 480px) {
+  body { padding: 16px 12px 40px; }
+  .card { padding: 18px; }
+  .todo-list { max-height: 300px; }
+}
